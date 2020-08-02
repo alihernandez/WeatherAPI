@@ -1,3 +1,8 @@
-.lgroup {
-    padding-right: 50px;
+
+.jumbotron {
+    background-color: aqua;
+};
+
+#container {
+    background-color: aqua;
 }

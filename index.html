@@ -1,142 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link 
     rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  />
+    src="style.css"/>
     <title>Weather_API</title>
-</head>
-<body>
+  </head>
+  <body style="background-color: skyblue;">
     <!--Header-->
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-4" style="text-align: center;">Weather_API</h1>
-          <p class="lead" style="text-align: center;">Wk6 Homework.</p>
-        </div> 
+    <div class="jumbotron jumbotron-fluid" style="background-color: slategray;">
+      <div class="container">
+        <h1 class="display-4" style="text-align: center;">Weather_API</h1>
+        <p class="lead" style="text-align: center;">Wk6 Homework.</p>
       </div>
-      <br>
-   
-      <!--Container Main Body-->
-      <div class="container-fluid">
-        
-      <!--Search bar-->
-      <div class= "row">
-      <div class="col-md-3">
-        <nav class="navbar navbar-light bg-light">
-          <form class="form-inline">
-            <input class="inputValue" type="search" placeholder="Search A City" aria-label="Search">
-            <button class="button" type="submit">Search</button>
-          </form>
-        </nav>
-     
-      <!--Search History-->
-      <ul class="list-group">
-        <li class="list-group-item" id="history"></li>
-        <li class="list-group-item"></li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-      
-
     </div>
-      <!--Weather/City Display-->
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-header">
-            Quote
-          </div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <div id="forecast">
-                <p></p>
-              </div>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
-          </div>
+    <br />
+
+    <!--Container Main Body-->
+    <div class="container-fluid">
+      
+      <!--Search bar-->
+      <div class="row">
+        <div class="col-md-3" style="background-color: skyblue;">
+          <nav class="navbar navbar-light bg-light" style="background-color: skyblue;">
+            <form class="form-inline">
+              <input
+                class="inputValue"
+                type="search"
+                placeholder="Search A City"
+                aria-label="Search"
+                id="city"
+              />
+              <button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+
+          <!--Search History-->
+          <ul class="list-group">
+            <li class="list-group-item" id="history" style="background-color: slategray;"></li>
+            
+          </ul>
         </div>
-          
+        <!--Weather/City Display-->
+        <div class="col-md-9" style="background-color: snow;">
+          <div class="card">
+            <div class="card-header" id="name">
+              Quote
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <div class="forecast" id="forecast"></div>
+              </blockquote>
+            </div>
+          </div>
+
           <!--Five Day Forecast-->
 
           <div class="row">
-            <div class="card-group">
-              <div class="card">
-                
-                <div class="card-body">
-                  <h5 class="card-title">Mon</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-              <div class="card">
-                
-                <div class="card-body">
-                  <h5 class="card-title">Tues</h5>
-                  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-              <div class="card">
-                
-                <div class="card-body">
-                  <h5 class="card-title">Wed</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-              <div class="card">
-                
-                <div class="card-body">
-                  <h5 class="card-title">Thus</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-              <div class="card">
-                
-                <div class="card-body">
-                  <h5 class="card-title">Fri</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-            </div>
-            
-            
-
-            
-            
-          
-        
+            <div class="card-group" style="background-color: snow;"></div>
+          </div>
         </div>
-        
-      
-    
-
-      
-      
-      
-      
-
-    </div>
-    </div>
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js">
-    </script>
-    
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -1,65 +1,118 @@
-
-var inputValue = document.querySelector('.inputValue');
+var inputValue = document.querySelector(".inputValue");
+var cities = [];
 //http://api.openweathermap.org/data/2.5/forecast?q='+input.value+'&appid=5b45363e475837e210997c7e74afeacd
 
-
-
-    $("button").on("click", function () {
+$(document).ready(function () {
+  $("button").on("click", function () {
     event.preventDefault();
-    var queryURL= 'https://api.openweathermap.org/data/2.5/weather?q='+inputValue.value+'&appid=5b45363e475837e210997c7e74afeacd';
-    console.log("send it");
-    console.log(inputValue)
-   
+    var queryURL =
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      inputValue.value +
+      "&units=imperial&appid=5b45363e475837e210997c7e74afeacd";
+    var city = $("#city").val();
+    $("#name").empty();
+    var name =$("<h3>").addClass("#name").text(inputValue.value);
+    $("#name, #history").append(name);
+    console.log(inputValue.value);
+
     $.ajax({
-        url: queryURL,
+      url: queryURL,
+      method: "GET",
+    }).then(function (response) {
+      $("#forecast").empty();
+      var current = $("<p>")
+        .addClass("forecast")
+        .text("Current forecast: " + response.weather[0].description );
+      var tempL = $("<p>")
+        .addClass("forecast")
+        .text("The low today is: " + response.main.temp_min + "F");
+      var tempH = $("<p>")
+        .addClass("forecast")
+        .text("The high today is: " + response.main.temp_max + "F");
+      var iconurl =
+        "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
+      var img = $("<img>").attr("src", iconurl);
+      var h2 = $("<h2>").text(moment(response.dt, "X").format("MM/DD/YYYY"));
+      var humid = $("<p>")
+        .addClass("forecast")
+        .text("Humidity: " + response.main.humidity + "%");
+      
+    //ajax call for UV index
+      $.ajax({
+        url:
+          "http://api.openweathermap.org/data/2.5/uvi?appid=5b45363e475837e210997c7e74afeacd&lat=" +
+          response.coord.lat +
+          "&lon=" +
+          response.coord.lat,
         method: "GET",
-      }).then(function (response) {
+      }).then(function (response2) {
+        $(".card-group").empty();
+        var uv = $("<p>")
+          .addClass("forecast")
+          .text("UV index " + response2.value);
+        console.log(response2);
+        //appends everything to the forcast ID
+        $("#forecast").append(h2, current, img, tempH, tempL, humid, uv);
 
-        //console.log(response);
-        var results = response.weather;
-        //console.log(results);
-        
+        //ajax call for five day forcast
+        $.ajax({
+          url:
+            "https://api.openweathermap.org/data/2.5/forecast?q=" +
+            inputValue.value +
+            "&appid=5b45363e475837e210997c7e74afeacd&units=imperial",
+          method: "GET",
+        }).then(function (response3) {
+          console.log(response3);
+          var fiveDay = response3.list;
+          for (let index = 0; index < fiveDay.length; index++) {
+            if (fiveDay[index].dt_txt.includes("00:00:00")) {
+              //     <div class="card">
 
-        for (var i = 0; i < results.length; i++) {
-            var weatherDiv = $("<div>");
-            
-            console.log(results.length);
-            var forecast = results[i].description;
-            console.log(results[i])
-            console.log(forecast)
-            //displays current weather
-            var p = $("<p>").text("Current Weather: " + forecast);
-            var li = $("<li>").text(inputValue.value);
+              //     <div class="card-body">
+              //       <h5 class="card-title"></h5>
+              //       <p class="card-text"></p>
+              //     </div>
+              //
+              //   </div>
 
-            weatherDiv.append(p);
-            
-            //where data appears on page
-            $("#forecast").prepend(weatherDiv);
-            $("#history").append(li);
+              var card = $("<div class=<'card'>");
+              var body = $("<div class='card-body'>");
+              var title = $("<h5 class = 'card-title'>").text(
+                moment(fiveDay[index].dt, "X").format("MM/DD/YYYY")
+              );
+              var iconurl =
+                "http://openweathermap.org/img/w/" +
+                fiveDay[index].weather[0].icon +
+                ".png";
+              var img = $("<img>").attr("src", iconurl);
+              var info = $("<p class= 'card-text'>").text(
+                "Temperature: " + fiveDay[index].main.temp
+              );
+              body.append(title, info, img);
 
-        }
+              card.append(body);
 
-    })});
-    
+              $(".card-group").append(card);
+            }
+          }
+        });
+      });
 
-    //.catch(err => alert("Invalid City Name!"))
+      console.log(response);
+    });
+  });
+});
 
-
-
-
-
-
-
-
+//.catch(err => alert("Invalid City Name!"))
 
 //$("#srchBtn").on("click", function () {
-    //var forecast = $(this).attr("forecast");
-    //var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid=5b45363e475837e210997c7e74afeacd"};
+//var forecast = $(this).attr("forecast");
+//var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid=5b45363e475837e210997c7e74afeacd"};
 
-    //$.ajax({
-      //url: queryURL,
-      //method: "GET",
-    //}).then(function (response) {
+//$.ajax({
+//url: queryURL,
+//method: "GET",
+//}).then(function (response) {
 
-        //console.log(response)
-    //})}
+//console.log(response)
+//})}
