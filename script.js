@@ -19,6 +19,7 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (response) {
+        //clears forecast ID
       $("#forecast").empty();
       var current = $("<p>")
         .addClass("forecast")
@@ -91,7 +92,7 @@ $(document).ready(function () {
               body.append(title, info, img);
 
               card.append(body);
-
+            //appends everything to card-group class
               $(".card-group").append(card);
             }
           }
