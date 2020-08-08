@@ -11,7 +11,7 @@ $(document).ready(function () {
       "&units=imperial&appid=5b45363e475837e210997c7e74afeacd";
     var city = $("#city").val();
     $('#name').append(city);
-    //$("#name").empty();
+    $("#name").empty();
     //var name =$("<h3>").addClass("#name").text(inputValue.value).html(<a href="http://www.google.com"></a>); 
     //var link =$("<h3>").html("<a href=htt")
     //$("#name, #history").append(name, link);
