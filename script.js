@@ -1,6 +1,6 @@
 var inputValue = document.querySelector(".inputValue");
 var cities = [];
-//http://api.openweathermap.org/data/2.5/forecast?q='+input.value+'&appid=5b45363e475837e210997c7e74afeacd
+//https://api.openweathermap.org/data/2.5/forecast?q='+input.value+'&appid=5b45363e475837e210997c7e74afeacd
 
 $(document).ready(function () {
   $("button").on("click", function () {
@@ -33,7 +33,7 @@ $(document).ready(function () {
         .addClass("forecast")
         .text("The high today is: " + response.main.temp_max + "F");
       var iconurl =
-        "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
+        "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
       var img = $("<img>").attr("src", iconurl);
       var h2 = $("<h2>").text(moment(response.dt, "X").format("MM/DD/YYYY"));
       var humid = $("<p>")
@@ -43,7 +43,7 @@ $(document).ready(function () {
     //ajax call for UV index
       $.ajax({
         url:
-          "http://api.openweathermap.org/data/2.5/uvi?appid=5b45363e475837e210997c7e74afeacd&lat=" +
+          "https://api.openweathermap.org/data/2.5/uvi?appid=5b45363e475837e210997c7e74afeacd&lat=" +
           response.coord.lat +
           "&lon=" +
           response.coord.lat,
@@ -84,7 +84,7 @@ $(document).ready(function () {
                 moment(fiveDay[index].dt, "X").format("MM/DD/YYYY")
               );
               var iconurl =
-                "http://openweathermap.org/img/w/" +
+                "https://openweathermap.org/img/w/" +
                 fiveDay[index].weather[0].icon +
                 ".png";
               var img = $("<img>").attr("src", iconurl);
